@@ -1,5 +1,7 @@
 # tic tac toe Game
 
+#import os for system function
+import os
 
 # glob variables
 winner = None
@@ -160,16 +162,24 @@ def announce_winner(our_winner):
         print('draw ...')
 
 
+# clear outpu each stage
+def clear():
+    os.system('clear')
+
+
 # main function that run at the end
 def main():
 
+    clear()
     show_board()
     player_marker()
+    clear()
 
     while not game_is_over:
         show_board()
         announce_turn()
         move()
+        clear()
         flip_player()
         check_game_is_over()
 
