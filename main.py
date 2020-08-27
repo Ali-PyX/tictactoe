@@ -1,12 +1,15 @@
 # tic tac toe Game
 
 # init board
-board = []
+board = ['-'] * 10
 
 # show current board
 def show_board():
-    pass
-
+    print(f'{board[7]} | {board[8]} | {board[9]}')
+    print(f'{board[4]} | {board[5]} | {board[6]}')
+    print(f'{board[1]} | {board[2]} | {board[3]}')
+    # board[0] will never use , just define for being easy to read code
+    return
 
 # select move
 def select_action():
@@ -37,6 +40,6 @@ def check_game_is_over():
 
 # main function that run at the end
 def main():
-    pass
+    show_board()
 
-# main()
+main()
