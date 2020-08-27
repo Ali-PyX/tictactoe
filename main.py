@@ -164,7 +164,10 @@ def announce_winner(our_winner):
 
 # clear outpu each stage
 def clear():
+    #for windows users , change 'clear' prameter to 'cls'
+    #for linux its works fine , just edit it if ur os is windows
     os.system('clear')
+
 
 
 # main function that run at the end
