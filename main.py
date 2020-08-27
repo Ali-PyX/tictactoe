@@ -1,7 +1,18 @@
 # tic tac toe Game
 
+
+# glob variables
+winner = None
+game_is_over = False
+p1 = None
+p2 = None
+player_turn = None
+
+
+
 # init board
 board = ['-'] * 10
+
 
 # show current board
 def show_board():
@@ -11,18 +22,66 @@ def show_board():
     # board[0] will never use , just define for being easy to read code
     return
 
+
+# select player marker as X adn O in order p1 and p2(p = player)
+def player_marker():
+    global p1, p2, player_turn
+
+    while p1 not in ['X', 'O']:
+        p1 = input('p1 select between X and O : ')
+
+    if p1 == 'X':
+        p2 = 'O'
+    else:
+        p2 = 'X'
+
+    player_turn = p1
+
+    print(f'p1 : {p1}, p2 : {p2}')
+
+# announce player's turn
+def announce_turn():
+    print(f'{player_turn}\' turn')
+    return
+
 # select move
 def select_action():
-    pass
+    player_select = None
+
+    allowed_choice = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    while True:
+        player_select = input('select from 1-9: ')
+
+        if player_select not in allowed_choice:
+            print('notallowed action, try again !')
+            continue
+
+        if board[int(player_select)] in ['X', 'O']:
+            print(f'this cell selected by {board[int(player_select)]} before')
+            continue
+
+        break
+    return int(player_select)
+
 
 # move as player select and mark
 def move():
-    pass
+
+    action = select_action()
+    board[action] = player_turn
+    return
 
 
 # flip player mark between X and O
 def flip_player():
-    pass
+    global player_turn
+
+    if player_turn == p1:
+        player_turn = p2
+    else:
+        player_turn = p1
+    return
+
 
 def check_game_is_over():
 
@@ -37,9 +96,22 @@ def check_game_is_over():
     def check_diagonals():
         pass
 
+    def check_draw():
+        pass
+
 
 # main function that run at the end
 def main():
+
     show_board()
+    player_marker()
+
+    while not game_is_over:
+        show_board()
+        announce_turn()
+        move()
+        flip_player()
+        check_game_is_over()
+
 
 main()
