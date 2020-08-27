@@ -88,16 +88,32 @@ def check_game_is_over():
     def check_rows():
         pass
 
-
     def check_coulmns():
         pass
-
 
     def check_diagonals():
         pass
 
     def check_draw():
-        pass
+        empty_count = 0
+        for cell in board:
+            if cell not in ['X', 'O']:
+                empty_count += 1
+
+        return empty_count == 1
+
+
+    if check_draw():
+        global game_is_over
+        game_is_over = True
+
+def announce_winne(our_winner):
+    if our_winner == p1:
+        print(f'p1 win as {p1}')
+    elif our_winner == p2:
+        print(f'p2 win as {p2}')
+    else:
+        print('draw . . .')
 
 
 # main function that run at the end
@@ -113,5 +129,6 @@ def main():
         flip_player()
         check_game_is_over()
 
+    announce_winne(winner)
 
 main()
