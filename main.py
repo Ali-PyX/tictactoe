@@ -83,17 +83,58 @@ def flip_player():
     return
 
 
+# if none of them gona true, game will be continue
 def check_game_is_over():
 
+    global game_is_over
+    global winner
+
+
+    # Check Each Row
     def check_rows():
-        pass
+        row_3 = board[7] == board[8] == board[9] in ['X', 'O']
+        row_2 = board[4] == board[5] == board[6] in ['X', 'O']
+        row_1 = board[1] == board[2] == board[3] in ['X', 'O']
 
+        if row_1 or row_2 or row_3:
+            return True
+
+    if check_rows():
+
+        game_is_over = True
+        winner = player_turn
+        return
+
+    # Check Each Coulmns
     def check_coulmns():
-        pass
+        col_1 = board[1] == board[4] == board[7] in ['X', 'O']
+        col_2 = board[2] == board[5] == board[8] in ['X', 'O']
+        col_3 = board[3] == board[6] == board[9] in ['X', 'O']
 
+        if col_1 or col_2 or col_3:
+            return True
+
+    if check_coulmns():
+
+        game_is_over = True
+        winner = player_turn
+        return
+
+    # Check Each Diagonal
     def check_diagonals():
-        pass
+        diagonal_1 = board[1] == board[5] == board[9] in ['X', 'O']
+        diagonal_2 = board[3] == board[5] == board[7] in ['X', 'O']
 
+        if diagonal_1 or diagonal_2:
+            return True
+
+    if check_diagonals():
+
+        game_is_over = True
+        winner = player_turn
+        return
+
+    # Check For Tie
     def check_draw():
         empty_count = 0
         for cell in board:
@@ -104,16 +145,19 @@ def check_game_is_over():
 
 
     if check_draw():
-        global game_is_over
-        game_is_over = True
 
-def announce_winne(our_winner):
-    if our_winner == p1:
+        game_is_over = True
+        return
+
+
+# announce winner after game is game_is_over(No wiiner => Tie or Draw)
+def announce_winner(our_winner):
+    if our_winner == p2:
         print(f'p1 win as {p1}')
-    elif our_winner == p2:
+    elif our_winner == p1:
         print(f'p2 win as {p2}')
     else:
-        print('draw . . .')
+        print('draw ...')
 
 
 # main function that run at the end
@@ -129,6 +173,9 @@ def main():
         flip_player()
         check_game_is_over()
 
-    announce_winne(winner)
+    show_board()
+    announce_winner(winner)
 
+
+# Run Game
 main()
